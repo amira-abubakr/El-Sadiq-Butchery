@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@theme {
+  /* باليت الألوان - جزارة الملكية */
+  --color-primary: #8A0000; /* أحمر قاني فخم */
+  --color-secondary: #0f172a; /* كحلي فحمي */
+  --color-accent: #f7c321; /* ذهبي */
+  
+  --color-meat: #991b1b;
+  --color-bone: #f8fafc;
+  
+  /* تعريف الخطوط */
+  --font-cairo: "Cairo", sans-serif;
+  --font-outfit: "Outfit", sans-serif;
+}
+
+@layer base {
+  html {
+     scroll-behavior: smooth;
+  }
+}
