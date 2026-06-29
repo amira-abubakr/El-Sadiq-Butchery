@@ -48,8 +48,7 @@ postcss: {
   nitro: {
     routeRules: {
       '/sanctum/**': { proxy: 'https://elsdeq-db.vercel.app/sanctum/**',    cors: true, },
-      '/v1/**': { proxy: 'https://elsdeq-db.vercel.app/**',    cors: true, }
-       
+      '/v1/**': { proxy: 'https://elsdeq-db.vercel.app/v1/**',    cors: true, }
     }
   },
 

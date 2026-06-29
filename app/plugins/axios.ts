@@ -4,7 +4,7 @@ export default defineNuxtPlugin(() => {
   const config = useRuntimeConfig();
 
   const api = axios.create({
-    baseURL: config.public.apiBase,
+    baseURL: process.client ? '/' : config.public.apiBase,
     withCredentials: true,
     xsrfCookieName: 'XSRF-TOKEN', // 👈 اسم الكوكي اللي بيبعتها لارافل
     xsrfHeaderName: 'X-XSRF-TOKEN', // 👈 اسم الهيدر اللي لارافل مستنيه

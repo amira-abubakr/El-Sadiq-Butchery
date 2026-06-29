@@ -38,9 +38,9 @@
         <!-- Left: Auth & Cart -->
         <div class="flex items-center gap-4">
           <!-- Login Button -->
-          <button class="border-2 border-[#8B1D1D] text-[#8B1D1D] px-5 py-1.5 rounded-lg font-bold text-[14px] transition-all hover:bg-[#8B1D1D] hover:text-white active:scale-95 whitespace-nowrap">
+          <NuxtLink to="/login" class="border-2 border-[#8B1D1D] text-[#8B1D1D] px-5 py-1.5 rounded-lg font-bold text-[14px] transition-all hover:bg-[#8B1D1D] hover:text-white active:scale-95 whitespace-nowrap">
             تسجيل الدخول
-          </button>
+          </NuxtLink>
 
           <!-- Shopping Bag -->
           <div 
