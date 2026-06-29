@@ -1,14 +1,14 @@
 <template>
-  <div dir="rtl" class="font-cairo selection:bg-primary selection:text-white antialiased">
+  <v-app dir="rtl" class="font-cairo selection:bg-primary selection:text-white antialiased">
     <NuxtLayout>
-      <NuxtPage />
+      <v-main>
+        <NuxtPage />
+      </v-main>
     </NuxtLayout>
-  </div>
+  </v-app>
 </template>
 
 <style>
-
-
 .font-cairo {
   font-family: 'Cairo', sans-serif;
 }

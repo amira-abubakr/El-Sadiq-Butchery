@@ -1,9 +1,9 @@
 <template>
-  <div class="login-page" dir="rtl">
+  <div class="register-page" dir="rtl">
     
-    <!-- القسم اليمين: نموذج تسجيل الدخول -->
-    <div class="login-form-side">
-      <div class="login-form-container">
+    <!-- القسم اليمين: نموذج إنشاء الحساب -->
+    <div class="register-form-side">
+      <div class="register-form-container">
         
         <!-- اللوجو والاسم -->
         <NuxtLink to="/" class="logo-row">
@@ -15,16 +15,35 @@
 
         <!-- عناوين الترحيب -->
         <div class="welcome-text">
-          <h2>مرحباً بك مجدداً</h2>
-          <p>سجل دخولك لطلب أفضل قطع اللحم من المزرعة مباشرة</p>
+          <h2>إنشاء حساب جديد</h2>
+          <p>انضم إلينا للاستمتاع بأفضل جودة من قطع اللحم لبيتك</p>
         </div>
 
         <!-- الفورم -->
-        <form class="login-form" @submit.prevent="handleLogin">
+        <form class="register-form" @submit.prevent="">
           <div class="form-group">
-            <label>البريد الإلكتروني أو رقم الهاتف</label>
+            <label>الاسم الكامل</label>
             <div class="input-wrapper">
-              <input v-model="email" type="text" placeholder="name@example.com" />
+              <input v-model="name" type="text" placeholder="أدخل اسمك بالكامل" />
+              <div class="input-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group grid-cols-2">
+            <div class="w-full">
+              <label>رقم الهاتف</label>
+              <div class="input-wrapper">
+                <input v-model="phone" type="tel" placeholder="01xxxxxxxxx" />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>البريد الإلكتروني</label>
+            <div class="input-wrapper">
+              <input v-model="email" type="email" placeholder="example@mail.com" />
               <div class="input-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
               </div>
@@ -32,10 +51,7 @@
           </div>
 
           <div class="form-group">
-            <div class="label-row">
-              <label>كلمة المرور</label>
-              <a href="#" class="forgot-link">نسيت كلمة المرور؟</a>
-            </div>
+            <label>كلمة المرور</label>
             <div class="input-wrapper">
               <input v-model="password" :type="showPassword ? 'text' : 'password'" placeholder="••••••••" />
               <div class="input-icon clickable" @click="showPassword = !showPassword">
@@ -45,42 +61,41 @@
             </div>
           </div>
 
-          <!-- تذكرني -->
-          <div class="remember-row">
-            <input type="checkbox" id="remember" />
-            <label for="remember">تذكرني على هذا الجهاز</label>
+          <div class="form-group">
+            <label>تأكيد كلمة المرور</label>
+            <div class="input-wrapper">
+              <input v-model="confirmPassword" :type="showConfirmPassword ? 'text' : 'password'" placeholder="••••••••" />
+              <div class="input-icon clickable" @click="showConfirmPassword = !showConfirmPassword">
+                <svg v-if="!showConfirmPassword" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>
+                <svg v-else xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.52 13.52 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" x2="22" y1="2" y2="22"/></svg>
+              </div>
+            </div>
           </div>
 
-          <!-- زر الدخول -->
-          <button type="submit" class="login-btn">
-            تسجيل الدخول
+          <!-- زر تسجيل الحساب -->
+          <button type="submit" class="register-btn">
+            إنشاء حساب
           </button>
         </form>
 
         <!-- footer -->
         <div class="form-footer">
-           <p>ليس لديك حساب؟ <NuxtLink to="/register">إنشاء حساب جديد</NuxtLink></p>
-        </div>
-
-        <div class="footer-links">
-           <a href="#">سياسة الخصوصية</a>
-           <a href="#">شروط الخدمة</a>
-           <a href="#">اتصل بنا</a>
+           <p>لديك حساب بالفعل؟ <NuxtLink to="/login">تسجيل الدخول</NuxtLink></p>
         </div>
 
       </div>
     </div>
 
-    <!-- القسم اليسار: الصورة -->
-    <div class="login-image-side">
+    <!-- القسم الأيسر: الصورة -->
+    <div class="register-image-side">
       <img src="/images/Image.png" alt="Premium Meat" />
       <div class="image-overlay"></div>
       <div class="image-text">
         <h2>
-          جودة يمكنك تذوقها،<br/>
-          ثقة تتوارثها الأجيال.
+          أكمل طلبك بلمسة واحدة،<br/>
+          فقط للجودة الصادقة.
         </h2>
-        <p>نوفر أجود أنواع اللحوم من المزارع المحلية مباشرة إلى مائدتكم.</p>
+        <p>انضم الآن لمجتمع ملحمة الصديق والطلب أصبح أسرع بكثير.</p>
         <span class="since-text">Quality Since 1994</span>
       </div>
     </div>
@@ -91,44 +106,49 @@
 <script setup>
 import { ref } from 'vue';
 
-const email = ref("");
-const password = ref("");
-
-
-
-const { $api } = useNuxtApp();
-
-const handleLogin = async () => {
-  try {
-    const formData = new FormData();
-    formData.append("email", email.value);
-    formData.append("password", password.value);
-
-    // بنبعت الطلب، والسيرفر هيرد بـ Cookie فيها الـ Session ID
-    const res = await $api.post("v1/login", formData);
-
-    if (res.data.success) {
-      // مفيش توكن هنخزنه، الكوكيز بتتحفظ لوحدها في المتصفح
-      navigateTo("/");
-    }
-
-  } catch (err) {
-    console.error("Login Error:", err.response?.data?.message || err.message);
-    alert(err.response?.data?.message || "فشل تسجيل الدخول، تأكد من البيانات");
-  }
-};
-
-
 definePageMeta({
   layout: false
 });
 
 const showPassword = ref(false);
+const showConfirmPassword = ref(false);
+
+const name = ref("");
+const phone = ref("");
+const email = ref("");
+const password = ref("");
+const confirmPassword = ref("");
+
+
+
+const { $api } = useNuxtApp();
+
+const handleRegister = async () => {
+  try {
+    const formData = new FormData();
+    formData.append("name", name.value);
+    formData.append("phone", phone.value);
+    formData.append("email", email.value);
+    formData.append("password", password.value);
+    formData.append("password_confirmation", confirmPassword.value);
+
+    const res = await $api.post("/register", formData);
+
+    if (res.data.success) {
+      // بعد التسجيل، السيرفر غالباً بيعمل login تلقائي وبيرجع Session
+      navigateTo("/");
+    }
+  } catch (err) {
+    console.error("Register Error:", err.response?.data?.message || err.message);
+    alert(err.response?.data?.message || "حدث خطأ أثناء إنشاء الحساب");
+  }
+};
+
 </script>
 
 <style scoped>
 /* === الصفحة الرئيسية === */
-.login-page {
+.register-page {
   display: flex;
   flex-direction: row;
   min-height: 100vh;
@@ -139,20 +159,20 @@ const showPassword = ref(false);
 }
 
 /* === القسم الأيمن - الفورم === */
-.login-form-side {
+.register-form-side {
   width: 50%;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 48px;
-  background: #fafafa;
+  background: var(--color-bone, #fafafa); /* باستخدام متغير Tailwind */
   overflow-y: auto;
 }
 
-.login-form-container {
+.register-form-container {
   width: 100%;
-  max-width: 400px;
+  max-width: 440px;
 }
 
 /* اللوجو */
@@ -160,35 +180,30 @@ const showPassword = ref(false);
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 48px;
+  margin-bottom: 32px;
 }
 
 .logo-icon {
   width: 48px;
   height: 48px;
-  background: #8A0000;
+  background: var(--color-primary, #8A0000); /* باستخدام متغير Tailwind */
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 4px 14px rgba(138, 0, 0, 0.3);
   transform: rotate(-3deg);
-  transition: transform 0.3s ease;
-}
-
-.logo-icon:hover {
-  transform: rotate(0deg);
 }
 
 .logo-text {
   font-size: 24px;
   font-weight: 900;
-  color: #0f172a;
+  color: var(--color-secondary, #0f172a); /* باستخدام متغير Tailwind */
   line-height: 1;
 }
 
 .logo-highlight {
-  color: #8A0000;
+  color: var(--color-primary, #8A0000); /* باستخدام متغير Tailwind */
   font-weight: 700;
 }
 
@@ -201,23 +216,21 @@ const showPassword = ref(false);
 .welcome-text h2 {
   font-size: 30px;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--color-secondary, #0f172a);
   margin: 0 0 8px 0;
-  letter-spacing: -0.5px;
 }
 
 .welcome-text p {
   font-size: 15px;
   color: #71717a;
   margin: 0;
-  font-weight: 500;
 }
 
 /* الفورم */
-.login-form {
+.register-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 }
 
 .form-group {
@@ -232,55 +245,26 @@ const showPassword = ref(false);
   margin-bottom: 6px;
 }
 
-.label-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: row-reverse;
-  margin-bottom: 6px;
-}
-
-.label-row label {
-  margin-bottom: 0;
-}
-
-.forgot-link {
-  font-size: 12px;
-  font-weight: 700;
-  color: #8A0000;
-  text-decoration: none;
-  transition: all 0.2s;
-}
-
-.forgot-link:hover {
-  text-decoration: underline;
-}
-
 .input-wrapper {
   position: relative;
 }
 
 .input-wrapper input {
   width: 100%;
-  padding: 14px 16px;
+  padding: 12px 14px;
   border-radius: 12px;
   border: 1px solid #e4e4e7;
   background: #fff;
   font-size: 15px;
   font-family: 'Cairo', sans-serif;
   text-align: right;
-  color: #18181b;
   outline: none;
   transition: all 0.2s ease;
   box-sizing: border-box;
 }
 
-.input-wrapper input::placeholder {
-  color: #c4c4cc;
-}
-
 .input-wrapper input:focus {
-  border-color: #8A0000;
+  border-color: var(--color-primary, #8A0000);
   box-shadow: 0 0 0 4px rgba(138, 0, 0, 0.08);
 }
 
@@ -292,7 +276,6 @@ const showPassword = ref(false);
   color: #a1a1aa;
   display: flex;
   pointer-events: none;
-  transition: color 0.2s;
 }
 
 .input-icon.clickable {
@@ -300,43 +283,11 @@ const showPassword = ref(false);
   cursor: pointer;
 }
 
-.input-icon.clickable:hover {
-  color: #8A0000;
-}
-
-.input-wrapper input:focus ~ .input-icon {
-  color: #8A0000;
-}
-
-/* تذكرني */
-.remember-row {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 8px;
-  flex-direction: row-reverse;
-}
-
-.remember-row input[type="checkbox"] {
-  width: 16px;
-  height: 16px;
-  accent-color: #8A0000;
-  cursor: pointer;
-}
-
-.remember-row label {
-  font-size: 14px;
-  color: #52525b;
-  font-weight: 500;
-  cursor: pointer;
-  user-select: none;
-}
-
-/* زر الدخول */
-.login-btn {
+/* زر التسجيل */
+.register-btn {
   width: 100%;
   padding: 16px;
-  background: #8A0000;
+  background: var(--color-primary, #8A0000);
   color: #fff;
   font-size: 17px;
   font-weight: 900;
@@ -345,22 +296,18 @@ const showPassword = ref(false);
   border-radius: 12px;
   cursor: pointer;
   box-shadow: 0 8px 24px rgba(138, 0, 0, 0.25);
-  transition: all 0.2s ease;
+  margin-top: 10px;
 }
 
-.login-btn:hover {
+.register-btn:hover {
   background: #7a0000;
-  box-shadow: 0 8px 28px rgba(138, 0, 0, 0.35);
-}
-
-.login-btn:active {
-  transform: scale(0.98);
+  transform: translateY(-1px);
 }
 
 /* Footer */
 .form-footer {
   text-align: center;
-  padding-top: 28px;
+  padding-top: 24px;
 }
 
 .form-footer p {
@@ -369,45 +316,20 @@ const showPassword = ref(false);
 }
 
 .form-footer a {
-  color: #8A0000;
+  color: var(--color-primary, #8A0000);
   font-weight: 700;
   text-decoration: none;
-  transition: all 0.2s;
-}
-
-.form-footer a:hover {
-  text-decoration: underline;
-}
-
-.footer-links {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
-  padding-top: 48px;
-}
-
-.footer-links a {
-  font-size: 11px;
-  color: #a1a1aa;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s;
-}
-
-.footer-links a:hover {
-  color: #8A0000;
 }
 
 /* === القسم الأيسر - الصورة === */
-.login-image-side {
+.register-image-side {
   width: 50%;
   min-height: 100vh;
   position: relative;
   overflow: hidden;
 }
 
-.login-image-side img {
+.register-image-side img {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -418,7 +340,8 @@ const showPassword = ref(false);
 .image-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(15, 23, 42, 0.65);
+  background: var(--color-secondary, rgba(15, 23, 42, 0.65));
+  opacity: 0.7;
 }
 
 .image-text {
@@ -436,39 +359,23 @@ const showPassword = ref(false);
   font-size: 42px;
   font-weight: 900;
   line-height: 1.3;
-  margin: 0 0 16px 0;
 }
 
 .image-text p {
   font-size: 18px;
   color: #cbd5e1;
-  font-weight: 500;
-  margin: 0;
 }
 
-.since-text {
-  display: block;
-  margin-top: 16px;
-  font-size: 13px;
-  color: #94a3b8;
-  font-style: italic;
-  font-family: 'Outfit', sans-serif;
-  opacity: 0.7;
-}
-
-/* === Responsive - للموبايل === */
+/* === Responsive === */
 @media (max-width: 768px) {
-  .login-page {
+  .register-page {
     flex-direction: column;
   }
-  
-  .login-form-side {
+  .register-form-side {
     width: 100%;
     padding: 32px 24px;
-    min-height: 100vh;
   }
-  
-  .login-image-side {
+  .register-image-side {
     display: none;
   }
 }

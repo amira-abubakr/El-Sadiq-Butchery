@@ -1,7 +1,30 @@
+import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
+
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  css: ['@/assets/css/main.css'],
+  css: ['./app/assets/css/main.css'],
+
+  build: {
+    transpile: ['vuetify'],
+  },
+
+  modules: [
+    (_options, nuxt) => {
+      nuxt.hooks.hook('vite:extendConfig', (config) => {
+        // @ts-expect-error
+        config.plugins.push(vuetify({ autoImport: true }))
+      })
+    },
+  ],
+
+  vite: {
+    vue: {
+      template: {
+        transformAssetUrls,
+      },
+    },
+  },
 
   app: {
     head: {
@@ -17,9 +40,22 @@ export default defineNuxtConfig({
     }
   },
 
-  postcss: {
-    plugins: {
-      '@tailwindcss/postcss': {},
-    },
+postcss: {
+  plugins: {
+    '@tailwindcss/postcss': {},
   },
+},
+  nitro: {
+    routeRules: {
+      '/sanctum/**': { proxy: 'https://elsdeq-db.vercel.app/sanctum/**',    cors: true, },
+      '/v1/**': { proxy: 'https://elsdeq-db.vercel.app/**',    cors: true, }
+       
+    }
+  },
+
+  runtimeConfig: {
+    public: {
+      apiBase: process.env.API_BASE_URL 
+    }
+  }
 })
